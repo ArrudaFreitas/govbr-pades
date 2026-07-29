@@ -1,0 +1,59 @@
+{
+    "name": "arrudafreitas/govbr-pades",
+    "description": "PHP library for PAdES digital signatures on PDFs via gov.br",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "pades",
+        "pdf",
+        "digital-signature",
+        "govbr",
+        "iti",
+        "icp-brasil"
+    ],
+    "authors": [
+        {
+            "name": "Ian Arruda",
+            "email": "contato@ianarruda.dev",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*",
+        "ext-openssl": "*"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "ArrudaFreitas\\GovbrPades\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ArrudaFreitas\\GovbrPades\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {},
+        "platform": {
+            "php": "7.4.33"
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint": "phpcs",
+        "fix": "phpcbf",
+        "stan": "phpstan analyse",
+        "test": "phpunit",
+        "check": [
+            "@lint",
+            "@stan",
+            "@test"
+        ]
+    }
+}

@@ -1,0 +1,13 @@
+* text=auto eol=lf
+*.pdf binary
+
+/.editorconfig     export-ignore
+/.gitattributes    export-ignore
+/.github/          export-ignore
+/.gitignore        export-ignore
+/Containerfile     export-ignore
+/Makefile          export-ignore
+/phpcs.xml.dist    export-ignore
+/phpstan.neon.dist export-ignore
+/phpunit.xml.dist  export-ignore
+/tests/            export-ignore
