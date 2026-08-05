@@ -26,7 +26,7 @@ fix: ## Automatically fix PSR-12 violations
 	$(RUN) php vendor/bin/phpcbf
 
 stan: ## Run the PHPStan static analysis
-	$(RUN) php vendor/bin/phpstan analyse --no-progress
+	$(RUN) php vendor/bin/phpstan analyse --no-progress --memory-limit=256M
 
 test: ## Run the PHPUnit suite
 	$(RUN) php vendor/bin/phpunit

@@ -294,3 +294,5 @@ composer.phar
 /.phpstan.cache
 /phpcs.xml
 /phpstan.neon
+
+/index.php
