@@ -81,6 +81,7 @@ final class CredentialsTest extends TestCase
     public function testTheSecretDoesNotLeakThroughTheTraceOfAFailedCreation(): void
     {
         $secret = ClientSecret::fromString(self::SECRET);
+        ini_set('zend.exception_ignore_args', '0');
 
         try {
             Credentials::create('client-id', $secret, 'not-a-url');
@@ -89,9 +90,14 @@ final class CredentialsTest extends TestCase
             self::assertStringNotContainsString(self::SECRET, $caught->getTraceAsString());
             self::assertStringNotContainsString(self::SECRET, (string) $caught);
 
-            foreach ($this->argumentsOfFailedCreation($caught) as $argument) {
+            $arguments = $this->argumentsOfFailedCreation($caught);
+            self::assertCount(3, $arguments);
+
+            foreach ($arguments as $argument) {
                 self::assertStringNotContainsString(self::SECRET, print_r($argument, true));
             }
+        } finally {
+            ini_restore('zend.exception_ignore_args');
         }
     }
 
