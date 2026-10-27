@@ -32,6 +32,10 @@ final class Response
         return $this->statusCode;
     }
 
+    /**
+     * Exactly as it arrived, byte for byte: assinarPKCS7 answers with binary DER, which any
+     * trim or encoding conversion would break.
+     */
     public function rawBody(): string
     {
         return $this->rawBody;

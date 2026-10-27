@@ -44,6 +44,9 @@ final class CurlHttpClient implements HttpClient
             CURLOPT_CUSTOMREQUEST => $request->method(),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER => true,
+            // The request may carry the client secret: no redirect may take it to another host,
+            // no scheme but http(s) is spoken (file:// would read the local disk) and the
+            // certificate is always checked.
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
             CURLOPT_SSL_VERIFYPEER => true,
@@ -65,6 +68,7 @@ final class CurlHttpClient implements HttpClient
         $statusCode = (int) curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
         $headerSize = (int) curl_getinfo($handle, CURLINFO_HEADER_SIZE);
 
+        // Since PHP 8.0 the handle is freed with the object, and curl_close() is deprecated in 8.5.
         if (PHP_VERSION_ID < 80000) {
             curl_close($handle);
         }

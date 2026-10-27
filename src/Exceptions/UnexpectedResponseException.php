@@ -6,6 +6,10 @@ namespace ArrudaFreitas\GovbrPades\Exceptions;
 
 use RuntimeException;
 
+/**
+ * Never carries the response body, not even quoted in a reason: the /token answer holds the
+ * access_token, and exception messages end up in logs.
+ */
 final class UnexpectedResponseException extends RuntimeException implements GovbrPadesException
 {
     private int $statusCode;
