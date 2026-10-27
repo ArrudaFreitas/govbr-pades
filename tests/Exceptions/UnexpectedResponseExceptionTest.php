@@ -47,11 +47,6 @@ final class UnexpectedResponseExceptionTest extends TestCase
         self::assertTrue($constructor->isPrivate());
     }
 
-    /**
-     * Structural guard for the rule in the class docblock: the /token response carries
-     * the access_token, and exception messages reach application logs. A factory taking
-     * a Response — or any object — would be the way that data gets in.
-     */
     public function testNoFactoryAcceptsAnObject(): void
     {
         $reflection = new ReflectionClass(UnexpectedResponseException::class);

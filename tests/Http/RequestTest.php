@@ -53,11 +53,6 @@ final class RequestTest extends TestCase
         self::assertSame('{"hashBase64":"' . self::HASH . '"}', $request->body());
     }
 
-    /**
-     * "\xB1\x31" is not valid UTF-8, so json_encode() refuses it. The point is not that
-     * this input is likely — it is that the failure leaves through the library's own
-     * exception instead of a JsonException nobody can catch generically.
-     */
     public function testAPayloadThatCannotBeEncodedRaisesTheLibraryException(): void
     {
         $this->expectException(InvalidPayloadException::class);

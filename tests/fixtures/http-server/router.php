@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Router script for PHP's built-in server, used by CurlHttpClientLocalServerTest.
- *
- * It fakes the two hosts the library talks to, mounted under /oauth and /api the same
- * way Environment::custom() splits them. Every branch answers with something the test
- * can assert byte for byte.
- */
 
 declare(strict_types=1);
 
@@ -25,8 +18,6 @@ if ($path === '/oauth/token' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 if ($path === '/api/assinarPKCS7' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Every byte value from 0x00 to 0xFF: any trim, encoding conversion or mb_* call on
-    // the way back would corrupt at least one of them.
     header('Content-Type: application/octet-stream');
     header('X-Received-Authorization: ' . ($_SERVER['HTTP_AUTHORIZATION'] ?? ''));
 

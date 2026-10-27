@@ -102,9 +102,6 @@ final class CredentialsTest extends TestCase
     }
 
     /**
-     * The whole trace cannot be dumped here: under PHPUnit it holds the test suite
-     * object graph and print_r() exhausts memory. Only the create() frame matters.
-     *
      * @return array<int, mixed>
      */
     private function argumentsOfFailedCreation(Throwable $caught): array

@@ -6,13 +6,6 @@ namespace ArrudaFreitas\GovbrPades\Exceptions;
 
 use RuntimeException;
 
-/**
- * Something arrived, but outside the contract.
- *
- * This exception deliberately never carries the response body. The /token endpoint
- * answers with the access_token inside it, and exception messages end up in application
- * logs. Only the status code and a reason that cannot contain payload data are exposed.
- */
 final class UnexpectedResponseException extends RuntimeException implements GovbrPadesException
 {
     private int $statusCode;

@@ -10,10 +10,6 @@ use ArrudaFreitas\GovbrPades\Http\Response;
 use PHPUnit\Framework\TestCase;
 
 /**
- * The reason layer 1 exists: layers 2 and 4 have to be buildable without network,
- * without credentials and without a PDF. This proves the seam by replaying a real
- * gov.br refusal through a fake client.
- *
  * @coversNothing
  */
 final class HttpClientContractTest extends TestCase
@@ -34,10 +30,6 @@ final class HttpClientContractTest extends TestCase
         self::assertSame('text/plain', $response->header('content-type'));
     }
 
-    /**
-     * A 403 is a legitimate answer that arrived. Deciding it means "bronze account" is
-     * the business layer's job, not the transport's.
-     */
     public function testTheTransportNeverTurnsAStatusCodeIntoAnException(): void
     {
         $canned = new Response(403, [], self::BRONZE_BODY);

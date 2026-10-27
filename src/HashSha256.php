@@ -6,9 +6,6 @@ namespace ArrudaFreitas\GovbrPades;
 
 use ArrudaFreitas\GovbrPades\Exceptions\InvalidPayloadException;
 
-/**
- * A SHA-256 digest, always 32 raw bytes.
- */
 final class HashSha256
 {
     private const RAW_LENGTH = 32;
@@ -25,12 +22,6 @@ final class HashSha256
         return new self(hash('sha256', $bytes, true));
     }
 
-    /**
-     * For a digest computed elsewhere. Expects the 32 raw bytes, never hex or base64 —
-     * hence the length check, which is the only thing that separates the three.
-     *
-     * @throws InvalidPayloadException
-     */
     public static function fromRawDigest(string $digest): self
     {
         if (strlen($digest) !== self::RAW_LENGTH) {

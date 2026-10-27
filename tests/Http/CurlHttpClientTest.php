@@ -21,10 +21,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class CurlHttpClientTest extends TestCase
 {
-    /**
-     * Nothing listens on port 1, so the connection is refused without ever leaving the
-     * machine. It exercises the failure path with no dependency on the network.
-     */
     private const UNREACHABLE_URL = 'http://127.0.0.1:1/oauth2.0/token';
 
     public function testItIsAnHttpClient(): void
@@ -66,9 +62,6 @@ final class CurlHttpClientTest extends TestCase
     }
 
     /**
-     * cURL reads a timeout of 0 as "wait forever", which would quietly disable the
-     * timeout — the same kind of switch the client refuses to have for TLS.
-     *
      * @dataProvider nonPositiveSeconds
      */
     public function testATimeoutThatWouldNeverFireIsRefused(int $seconds): void
