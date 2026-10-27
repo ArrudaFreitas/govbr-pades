@@ -15,12 +15,6 @@ final class CurlHttpClient implements HttpClient
     private int $timeout;
     private int $connectTimeout;
 
-    /**
-     * @throws InvalidConfigurationException when a timeout is zero or negative. cURL
-     *                                       reads 0 as "wait forever", which would be
-     *                                       the disable switch this client refuses to
-     *                                       have.
-     */
     public function __construct(
         int $timeout = self::DEFAULT_TIMEOUT,
         int $connectTimeout = self::DEFAULT_CONNECT_TIMEOUT
@@ -51,7 +45,6 @@ final class CurlHttpClient implements HttpClient
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER => true,
             CURLOPT_FOLLOWLOCATION => false,
-            // Refuses file://, gopher:// and every other scheme outright: https
             CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
             CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_SSL_VERIFYHOST => 2,

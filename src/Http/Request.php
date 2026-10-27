@@ -48,8 +48,6 @@ final class Request
 
     /**
      * @param array<string, mixed> $payload
-     *
-     * @throws InvalidPayloadException
      */
     public static function postJson(string $url, array $payload): self
     {

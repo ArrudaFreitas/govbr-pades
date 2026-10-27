@@ -45,10 +45,6 @@ final class HashSha256Test extends TestCase
         self::assertSame(32, strlen(HashSha256::ofBytes(random_bytes(4096))->raw()));
     }
 
-    /**
-     * The PDF being signed is binary, and hashing must run over the exact bytes of the
-     * ByteRange. Anything that treated the input as text would break here.
-     */
     public function testBinaryInputIsHashedByteForByte(): void
     {
         $bytes = "\x00\x01\xff\xfe\r\n%PDF-1.7\x00";
@@ -72,9 +68,6 @@ final class HashSha256Test extends TestCase
     }
 
     /**
-     * The whole point of the value object: a 64-char hex string and a 44-char base64
-     * string are both "the hash" in conversation, and both are wrong here.
-     *
      * @dataProvider valuesThatAreNotRawDigests
      */
     public function testFromRawDigestRejectsAnythingThatIsNotThirtyTwoBytes(string $value): void

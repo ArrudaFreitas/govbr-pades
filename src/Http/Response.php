@@ -32,11 +32,6 @@ final class Response
         return $this->statusCode;
     }
 
-    /**
-     * Returned exactly as it arrived, byte for byte. assinarPKCS7 answers with binary
-     * DER: trimming it, or passing it through any encoding or mb_* conversion, breaks
-     * the signature. There is deliberately no accessor that interprets the body.
-     */
     public function rawBody(): string
     {
         return $this->rawBody;

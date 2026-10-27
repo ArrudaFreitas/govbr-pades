@@ -10,13 +10,6 @@ use ArrudaFreitas\GovbrPades\Http\Request;
 use PHPUnit\Framework\TestCase;
 
 /**
- * The success path of the real cURL client, exercised against PHP's built-in server on
- * the loopback interface — no external network involved. This is exactly what
- * Environment::custom() exists for: pointing the library at a fake server.
- *
- * It is also the only place the byte-for-byte fidelity of Response::rawBody() is proven
- * over a real socket rather than promised in a comment.
- *
  * @covers \ArrudaFreitas\GovbrPades\Http\CurlHttpClient
  *
  * @uses \ArrudaFreitas\GovbrPades\Config\Environment

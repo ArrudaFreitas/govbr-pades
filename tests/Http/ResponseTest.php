@@ -17,10 +17,6 @@ final class ResponseTest extends TestCase
         self::assertSame(403, (new Response(403, [], ''))->statusCode());
     }
 
-    /**
-     * The signature dies if a single byte changes, so this guards the one thing the
-     * accessor promises: no trimming, no encoding conversion, no interpretation.
-     */
     public function testRawBodyIsReturnedByteForByte(): void
     {
         $der = "\x30\x82\x01\x0a\x00\r\n \xff\xfe   ";

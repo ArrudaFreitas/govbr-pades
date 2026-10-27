@@ -15,10 +15,6 @@ use ReflectionClass;
 use RuntimeException;
 
 /**
- * The project rule, enforced instead of merely written down: every exception the library
- * throws is catchable through the marker interface, and still extends the SPL exception
- * that fits it semantically, so existing catch blocks keep working.
- *
  * @coversNothing
  */
 final class ExceptionCatalogTest extends TestCase
@@ -59,10 +55,6 @@ final class ExceptionCatalogTest extends TestCase
         ];
     }
 
-    /**
-     * Layer 1 establishes the contract, not the catalogue. "Bronze account" and
-     * "irregular CPF" belong to layers 2 and 4, which know which endpoint they called.
-     */
     public function testNoBusinessErrorLeakedIntoLayerOne(): void
     {
         $files = glob(__DIR__ . '/../../src/Exceptions/*.php');
