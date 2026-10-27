@@ -18,6 +18,11 @@ final class InvalidConfigurationException extends InvalidArgumentException imple
         return new self(sprintf('%s must be a valid URL.', $field));
     }
 
+    public static function insecureUrl(string $field): self
+    {
+        return new self(sprintf('%s must use https; plain http is accepted only for the local machine.', $field));
+    }
+
     public static function nonPositiveTimeout(string $field, int $seconds): self
     {
         return new self(sprintf(
