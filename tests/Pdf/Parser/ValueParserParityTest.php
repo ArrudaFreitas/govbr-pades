@@ -30,6 +30,8 @@ use RuntimeException;
  */
 final class ValueParserParityTest extends TestCase
 {
+    // Recorded from the original implementation this parser was ported from, which lives outside
+    // this repository: a difference is a change of behaviour to justify, not a golden to refresh.
     private const GOLDEN = __DIR__ . '/../../fixtures/pdf/golden/values.jsonl';
 
     private const EXPECTED_CASES = 1812;

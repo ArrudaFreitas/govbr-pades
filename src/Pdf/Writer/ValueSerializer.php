@@ -92,6 +92,8 @@ final class ValueSerializer
             );
         }
 
+        // The fewest places that read back as the same double, always with %F: %f follows the
+        // locale (595,276 under pt_BR) and a plain cast may write an exponent, which PDF lacks.
         $text = null;
 
         for ($places = 0; $places <= self::MAXIMUM_DECIMAL_PLACES; $places++) {

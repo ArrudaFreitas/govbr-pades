@@ -19,6 +19,8 @@ use ArrudaFreitas\GovbrPades\Pdf\Value\PdfValue;
 
 final class ValueParser
 {
+    // Real documents nest five levels at most (measured over the whole corpus): 256 leaves
+    // room for any honest file and stops a hostile one before the recursion exhausts memory.
     public const MAXIMUM_DEPTH = 256;
 
     private int $depth = 0;
@@ -129,6 +131,10 @@ final class ValueParser
                 break;
             }
 
+            // Two leniencies of PDFBox (the gov.br signer), never silent: a dictionary missing its
+            // ">>" closes where the next keyword starts, and a value standing where a key belongs
+            // is discarded. Running out of text still throws: closing there would return half a
+            // dictionary as if it were whole.
             if ($cursor->atEnd()) {
                 throw InvalidPdfException::unterminatedDictionary();
             }
@@ -159,6 +165,8 @@ final class ValueParser
 
             $key = $this->readName($cursor)->value();
 
+            // An old signature's /Contents may hold a non-hexadecimal digit. PDFBox and the other
+            // measured readers go on, so it is kept unread; outside a signature it is refused below.
             if ($key !== 'Contents') {
                 $value = $this->parse($cursor);
             } else {
@@ -337,6 +345,7 @@ final class ValueParser
             return PdfString::illegibleHex($digits, $startsAt, $bad[0]);
         }
 
+        // ISO 32000-1, 7.3.4.3: a missing final digit is zero.
         if (strlen($digits) % 2 === 1) {
             $digits .= '0';
         }

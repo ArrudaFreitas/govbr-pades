@@ -72,6 +72,8 @@ final class PdfString implements PdfValue
 
     public static function fromBytes(string $bytes): self
     {
+        // A raw CR inside a literal string reads back as LF (ISO 32000-1, 7.3.4.2), changing the
+        // value silently; LF is escaped along with it.
         return new self(strtr($bytes, [
             '\\' => '\\\\',
             '(' => '\\(',
