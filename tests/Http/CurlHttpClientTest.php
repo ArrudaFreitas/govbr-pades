@@ -57,6 +57,14 @@ final class CurlHttpClientTest extends TestCase
         }
     }
 
+    public function testAFileUrlIsRefusedRatherThanReadFromTheLocalDisk(): void
+    {
+        $this->expectException(TransportFailureException::class);
+        $this->expectExceptionMessage(sprintf('(cURL error %d)', CURLE_UNSUPPORTED_PROTOCOL));
+
+        $this->failingClient()->send(Request::get('file://' . __FILE__));
+    }
+
     /**
      * cURL reads a timeout of 0 as "wait forever", which would quietly disable the
      * timeout — the same kind of switch the client refuses to have for TLS.
