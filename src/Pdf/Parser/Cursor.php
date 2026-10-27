@@ -6,6 +6,7 @@ namespace ArrudaFreitas\GovbrPades\Pdf\Parser;
 
 final class Cursor
 {
+    // NUL is white space too (ISO 32000-1, table 1).
     public const WHITESPACE = '[\x00\x09\x0A\x0C\x0D\x20]';
 
     private string $text;

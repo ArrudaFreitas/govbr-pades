@@ -37,6 +37,9 @@ final class ClientSecret
     }
 
     /**
+     * Masks var_dump() and print_r() only: var_export() has no hook and always prints the
+     * real value, so this object must never be var_export()ed.
+     *
      * @return array<string, string>
      */
     public function __debugInfo(): array

@@ -81,6 +81,9 @@ final class CredentialsTest extends TestCase
     public function testTheSecretDoesNotLeakThroughTheTraceOfAFailedCreation(): void
     {
         $secret = ClientSecret::fromString(self::SECRET);
+
+        // CI runs with the production php.ini, which strips arguments from traces. The PHP
+        // default keeps them, and that is the case the secret has to survive.
         ini_set('zend.exception_ignore_args', '0');
 
         try {

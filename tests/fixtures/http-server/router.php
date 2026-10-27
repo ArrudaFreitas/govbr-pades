@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -21,6 +20,7 @@ if ($path === '/api/assinarPKCS7' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/octet-stream');
     header('X-Received-Authorization: ' . ($_SERVER['HTTP_AUTHORIZATION'] ?? ''));
 
+    // Every byte from 0x00 to 0xFF: any trim or encoding conversion on the way back corrupts one.
     echo implode('', array_map('chr', range(0, 255)));
 
     return;
